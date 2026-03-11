@@ -1,0 +1,13 @@
+:root {
+    --font-color: #303030;
+}
+a {
+    text-decoration: none;
+    color: var( --font-color );
+}
+nav ul {
+    display: flex;
+    list-style-type: none;
+    gap: 20px;
+}
+
