@@ -1,13 +1,49 @@
 :root {
     --font-color: #303030;
+    --font-light-color: #dfdfdf;
+}
+body, ul, h1 {
+    margin: 0;
 }
 a {
     text-decoration: none;
     color: var( --font-color );
 }
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+nav {
+    background-color: #505050;
+}
 nav ul {
     display: flex;
     list-style-type: none;
-    gap: 20px;
+    padding: 0;
+    flex-wrap: wrap;
 }
-
+nav ul li {
+    padding: 10px 0px;
+}
+nav ul li:hover {
+    background-color: #606060;
+}
+nav ul a {
+    color: var( --font-light-color );
+    padding: 10px;
+}
+.main-title {
+    background-color: #202020;
+    color: var( --font-light-color );
+    align-items: flex-end;
+}
+.main-title h1 {
+    padding: 0;
+    font-size: 64px;
+}
