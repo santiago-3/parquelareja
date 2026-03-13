@@ -1,0 +1,198 @@
+I'm working on a laravel project
+The project is totally fresh, didn't write any code yet, but I did install a few laravel features
+these are the dependencies in the composer.json
+
+    "require": {
+        "php": "^8.2",
+        "laravel/framework": "^12.0",
+        "laravel/tinker": "^2.10.1",
+        "spatie/laravel-permission": "^6.24"
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.23",
+        "laravel/breeze": "^2.4",
+        "laravel/pail": "^1.2.2",
+        "laravel/pint": "^1.24",
+        "laravel/sail": "^1.41",
+        "mockery/mockery": "^1.6",
+        "nunomaduro/collision": "^8.6",
+        "phpunit/phpunit": "^11.5.50"
+    },
+
+I want to create a CRUD for some database entities.
+the tables already exist
+
+This is the structure I need 
+
+-Every table has a model defined in App\Models
+-The templates are plain blade templates, the form elements should preferably be written in plain html rather tha using laravel built-in functions to generate them, for the rest, standard laravel behaviour, errors can be shown with flash session messages, I'm ok with that. I'm not gonna ask for front end validation except for the html native input attributes
+-Every entity mus have a Controller with one method for every route, these controller must be placed in app\Http\Controllers\Admin
+-The controller don't access the models directly but through repository classes, the controllers only take care of receiving the requests inputs, calling the repositories, and returning the corresponding response
+-Every entity has repository, repositories can be all in one directory such as app/Repositories
+-Repositories must be loaded through dependency injection into the Controller methods
+-All the routes related to the CRUD must be protected under spatie roles system so that only users with the role 'admin' can access them. this applies to post endpoints but also to the ones that show the crud pages (list, forms)
+-If you think any other permission check layer is needed feel free to add it based on what I already said
+-I will need a layout for all the CRUD teplates with a menu with links to all the entity list pages
+-I don't need you to create any user with permissions, I will manage that my self
+
+These are the entities:
+
+Acivities:
+-Model name: Activity
+-Table name: lareja_web_activity
+-Fields:
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `date` datetime NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `description` text COLLATE utf8_unicode_ci,
+  `place_id` int(10) unsigned NOT NULL,
+  `link` varchar(1023) COLLATE utf8_unicode_ci NOT NULL,
+
+Stays:
+-Model name: Date
+-Table name: lareja_web_date
+-Fields:
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `caretakers` text COLLATE utf8_unicode_ci,
+
+Events :
+-Model name: Event
+-Table name: lareja_web_event
+-Has timestamp fields: yes
+-Has Logical deletion field: yes
+-Fields:
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `date` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `description` text COLLATE utf8_unicode_ci,
+  `info` text COLLATE utf8_unicode_ci,
+  `image` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+
+Parks:
+-Model name: Parks
+-Table name: lareja_web_park
+-Has timestamp fields: yes
+-Has Logical deletion field: yes
+-Fields:
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `description` text COLLATE utf8_unicode_ci NOT NULL,
+  `link` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+
+People:
+-Model name: Person
+-Table name: lareja_web_persons
+-Has timestamp fields: yes
+-Has Logical deletion field: yes
+-Fields:
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `last_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `phone` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `is_master` tinyint(1) NOT NULL,
+  `from_reservation` tinyint(1) NOT NULL DEFAULT '0',
+  `reservation_comments` text COLLATE utf8_unicode_ci,
+
+Places:
+-Model name: Place
+-Table name: lareja_web_places
+-Has timestamp fields: yes
+-Has Logical deletion field: yes
+-Fields:
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` text COLLATE utf8_unicode_ci NOT NULL,
+  `capacity` int(10) unsigned NOT NULL,
+
+Price items:
+-Model name: PriceItem
+-Table name: lareja_web_price_item
+-Has timestamp fields: yes
+-Has Logical deletion field: yes
+-Fields:
+  `denomination` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `price` int(11) NOT NULL,
+
+Reservations:
+-Model name: Reservation
+-Table name: lareja_web_reservation
+-Has timestamp fields: yes
+-Has Logical deletion field: yes
+-Fields:
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `is_keeper` tinyint(1) NOT NULL DEFAULT '0',
+  `total_amount` int(10) unsigned DEFAULT NULL,
+  `paid_amount` int(11) NOT NULL DEFAULT '0',
+  `workshop_people` int(11) NOT NULL,
+  `state_id` int(11) NOT NULL DEFAULT '1',
+  `responsible_id` int(10) unsigned DEFAULT NULL,
+  `responsible_category` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `responsible_category_2` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `responsible_category_3` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+
+Reservations extra:
+-Model name: ReservationExtra
+-Table name: lareja_web_reservation_extra
+-Has timestamp fields: yes
+-Has Logical deletion field: yes
+-Fields:
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `place_id` int(10) unsigned NOT NULL,
+  `reservation_id` int(10) unsigned DEFAULT NULL,
+  `date_from` datetime NOT NULL,
+  `date_to` datetime NOT NULL,
+  `people_number` int(10) unsigned NOT NULL,
+  `details` text COLLATE utf8_unicode_ci,
+  `responsible_id` int(10) unsigned DEFAULT NULL,
+  `oven` tinyint(1) DEFAULT NULL,
+  `workshop_categories` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `multipurpose_checked` tinyint(1) DEFAULT NULL,
+
+Reservation hosts:
+-Model name: ReservationHost
+-Table name: lareja_web_reservation_host
+-Has timestamp fields: yes
+-Has Logical deletion field: yes
+-Fields:
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `reservation_id` int(10) unsigned NOT NULL,
+  `person_id` int(10) unsigned NOT NULL,
+  `from` date NOT NULL,
+  `to` date NOT NULL,
+  `place_id` int(10) unsigned NOT NULL,
+  `enabled` tinyint(1) NOT NULL DEFAULT '1',
+  `hosting` tinyint(1) NOT NULL DEFAULT '1',
+  `linens` tinyint(1) NOT NULL DEFAULT '1',
+
+Reservation price items:
+-Model name: ReservationPriceItem
+-Table name: lareja_web_reservation_price_item
+-Has timestamp fields: yes
+-Has Logical deletion field: yes
+-Fields:
+  `reservation_id` int(11) NOT NULL,
+  `price_item_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `price` int(11) NOT NULL
+
+States:
+-Model name: State
+-Table name: lareja_web_state
+-Has timestamp fields: yes
+-Has Logical deletion field: yes
+-Fields:
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+
+Guests:
+-Model name: Guest
+-Table name: lareja_web_visitantes
+-Has timestamp fields: yes
+-Has Logical deletion field: yes
+-Fields:
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `fecha` date NOT NULL,
+  `nombre` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `apellido` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `telefono` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
