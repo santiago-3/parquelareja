@@ -8,6 +8,7 @@ use App\Http\Controllers\ReservationsController;
 use App\Http\Controllers\ActivitiesController;
 
 // Home/Park routes
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/el-parque', [HomeController::class, 'park'])->name('park');
 Route::get('/otros-parques', [HomeController::class, 'otherParks'])->name('other.parks');
 Route::get('/contacto', [HomeController::class, 'contact'])->name('contact');
