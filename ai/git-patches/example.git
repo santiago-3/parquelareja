@@ -1,0 +1,26 @@
+diff --git a/src/app/Http/Controllers/HomeController.php b/src/app/Http/Controllers/HomeController.php
+index 0b57a41..02ce62b 100644
+--- a/src/app/Http/Controllers/HomeController.php
++++ b/src/app/Http/Controllers/HomeController.php
+@@ -6,6 +6,9 @@
+ 
+ class HomeController extends Controller
+ {
++    public function index() {
++        return view('home');
++    }
+     /**
+      * Show the park page
+      */
+diff --git a/src/routes/web.php b/src/routes/web.php
+index 1f2004f..1efca36 100755
+--- a/src/routes/web.php
++++ b/src/routes/web.php
+@@ -8,6 +8,7 @@
+ use App\Http\Controllers\ActivitiesController;
+ 
+ // Home/Park routes
++Route::get('/', [HomeController::class, 'index'])->name('home');
+ Route::get('/el-parque', [HomeController::class, 'park'])->name('park');
+ Route::get('/otros-parques', [HomeController::class, 'otherParks'])->name('other.parks');
+ Route::get('/contacto', [HomeController::class, 'contact'])->name('contact');

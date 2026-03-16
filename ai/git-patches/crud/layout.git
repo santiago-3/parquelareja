@@ -1,0 +1,29 @@
+--- /dev/null
++++ b/resources/views/layouts/admin.blade.php
+@@ -0,0 +1,38 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++    <meta charset="UTF-8">
++    <title>Admin CRUD</title>
++    <style>
++        .nav { background: #f4f4f4; padding: 1rem; margin-bottom: 2rem; }
++        .nav a { margin-right: 15px; text-decoration: none; color: #333; }
++        .alert { padding: 10px; margin-bottom: 10px; background: #d4edda; color: #155724; }
++    </style>
++</head>
++<body>
++    <nav class="nav">
++        <strong>Menu:</strong>
++        <a href="{{ route('admin.activities.index') }}">Activities</a>
++        +    </nav>
++
++    @if(session('success'))
++        <div class="alert">{{ session('success') }}</div>
++    @endif
++
++    <div class="container">
++        @yield('content')
++    </div>
++</body>
++</html>

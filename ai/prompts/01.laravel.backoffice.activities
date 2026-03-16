@@ -1,6 +1,6 @@
 I'm working on a laravel project
-The project is totally fresh, didn't write any code yet, but I did install a few laravel features
-these are the dependencies in the composer.json
+The project is totally fresh, I didn't write any code yet, but I did install a few laravel features
+these is the current state of dependencies in the composer.json
 
     "require": {
         "php": "^8.2",
@@ -24,11 +24,11 @@ the tables already exist
 
 This is the structure I need 
 
--Every table has a model defined in App\Models
--The templates are plain blade templates, the form elements should preferably be written in plain html rather tha using laravel built-in functions to generate them, for the rest, standard laravel behaviour, errors can be shown with flash session messages, I'm ok with that. I'm not gonna ask for front end validation except for the html native input attributes
--Every entity mus have a Controller with one method for every route, these controller must be placed in app\Http\Controllers\Admin
--The controller don't access the models directly but through repository classes, the controllers only take care of receiving the requests inputs, calling the repositories, and returning the corresponding response
--Every entity has repository, repositories can be all in one directory such as app/Repositories
+-Every table must have a model defined in App\Models
+-The templates must be plain blade templates, the form elements should preferably be written in plain html rather tha using laravel built-in functions to generate them, for the rest, standard laravel behaviour is expected, errors can be shown with flash session messages, I'm ok with that. I'm not gonna ask for front end validation except for the html native input attributes
+-Every entity must have a Controller with one method for every route, these controllers must be placed in app\Http\Controllers\Admin
+-The controllers must not access the models directly but through repository classes, the controllers only take care of receiving the requests inputs, calling the repositories, and returning the corresponding response
+-Every entity has a repository, repositories can be all in the same directory such as app/Repositories
 -Repositories must be loaded through dependency injection into the Controller methods
 -All the routes related to the CRUD must be protected under spatie roles system so that only users with the role 'admin' can access them. this applies to post endpoints but also to the ones that show the crud pages (list, forms)
 -If you think any other permission check layer is needed feel free to add it based on what I already said
@@ -40,6 +40,8 @@ These are the entities:
 Acivities:
 -Model name: Activity
 -Table name: lareja_web_activity
+-Has timestamp fields: yes
+-Has Logical deletion field: yes
 -Fields:
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `date` datetime NOT NULL,
@@ -51,6 +53,8 @@ Acivities:
 Stays:
 -Model name: Date
 -Table name: lareja_web_date
+-Has timestamp fields: yes
+-Has Logical deletion field: no
 -Fields:
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `date` date NOT NULL,
@@ -82,7 +86,7 @@ Parks:
 
 People:
 -Model name: Person
--Table name: lareja_web_persons
+-Table name: lareja_web_person
 -Has timestamp fields: yes
 -Has Logical deletion field: yes
 -Fields:
@@ -97,9 +101,9 @@ People:
 
 Places:
 -Model name: Place
--Table name: lareja_web_places
--Has timestamp fields: yes
--Has Logical deletion field: yes
+-Table name: lareja_web_place
+-Has timestamp fields: no
+-Has Logical deletion field: no
 -Fields:
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` text COLLATE utf8_unicode_ci NOT NULL,
@@ -108,8 +112,8 @@ Places:
 Price items:
 -Model name: PriceItem
 -Table name: lareja_web_price_item
--Has timestamp fields: yes
--Has Logical deletion field: yes
+-Has timestamp fields: no
+-Has Logical deletion field: no
 -Fields:
   `denomination` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `price` int(11) NOT NULL,
@@ -134,8 +138,8 @@ Reservations:
 Reservations extra:
 -Model name: ReservationExtra
 -Table name: lareja_web_reservation_extra
--Has timestamp fields: yes
--Has Logical deletion field: yes
+-Has timestamp fields: no
+-Has Logical deletion field: no
 -Fields:
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `place_id` int(10) unsigned NOT NULL,
@@ -152,8 +156,8 @@ Reservations extra:
 Reservation hosts:
 -Model name: ReservationHost
 -Table name: lareja_web_reservation_host
--Has timestamp fields: yes
--Has Logical deletion field: yes
+-Has timestamp fields: no
+-Has Logical deletion field: no
 -Fields:
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `reservation_id` int(10) unsigned NOT NULL,
@@ -168,8 +172,8 @@ Reservation hosts:
 Reservation price items:
 -Model name: ReservationPriceItem
 -Table name: lareja_web_reservation_price_item
--Has timestamp fields: yes
--Has Logical deletion field: yes
+-Has timestamp fields: no
+-Has Logical deletion field: no
 -Fields:
   `reservation_id` int(11) NOT NULL,
   `price_item_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -178,8 +182,8 @@ Reservation price items:
 States:
 -Model name: State
 -Table name: lareja_web_state
--Has timestamp fields: yes
--Has Logical deletion field: yes
+-Has timestamp fields: no
+-Has Logical deletion field: no
 -Fields:
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -188,7 +192,7 @@ Guests:
 -Model name: Guest
 -Table name: lareja_web_visitantes
 -Has timestamp fields: yes
--Has Logical deletion field: yes
+-Has Logical deletion field: no
 -Fields:
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `fecha` date NOT NULL,
@@ -196,3 +200,14 @@ Guests:
   `apellido` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `telefono` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+
+-For all the entities with a place_id field, the input in edit/create forms must be a select for the records of the Place model
+-For all the entities with a state_id field, the input in edit/create forms must be a select for the records of the State model
+-For all the entities with a responsible_id field, the input in edit/create forms must be a select for the records of the Person model
+-For all the entities with a person_id field, the input in edit/create forms must be a select for the records of the Person model
+-For all the entities with a reservation_id field, the input in edit/create forms must be a select for the records of the Reservation model
+-For all the entities with a price_item_id field, the input in edit/create forms must be a select for the records of the PriceItem model
+-Controllers that load data of related entitities for the forms should also use the Repositories, for example if a list of places is needed for the activity table the places repository should be used from the controller
+
+Could you deliver this the format of git patches? This is a file with the same type of code as a the output of a 'git diff' command, so that I can use 'git apply' to apply these changes in the file system
+It would be ideal if there was one git patch file for each entity and one for the rest (layout template, providers file, routes, etc)

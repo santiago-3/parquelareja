@@ -1,0 +1,109 @@
+--- /dev/null
++++ b/app/Models/Activity.php
+@@ -0,0 +1,15 @@
++<?php
++namespace App\Models;
++
++use Illuminate\Database\Eloquent\Model;
++use Illuminate\Database\Eloquent\SoftDeletes;
++
++class Activity extends Model {
++    use SoftDeletes;
++    protected $table = 'lareja_web_activity';
++    protected $fillable = ['date', 'name', 'description', 'place_id', 'link'];
++
++    public function place() {
++        return $this->belongsTo(Place::class);
++    }
++}
+--- /dev/null
++++ b/app/Repositories/ActivityRepository.php
+@@ -0,0 +1,10 @@
++<?php
++namespace App\Repositories;
++use App\Models\Activity;
++
++class ActivityRepository extends BaseRepository {
++    public function __construct(Activity $model) {
++        $this->model = $model;
++    }
++}
+--- /dev/null
++++ b/app/Http/Controllers/Admin/ActivityController.php
+@@ -0,0 +1,52 @@
++<?php
++namespace App\Http\Controllers\Admin;
++
++use App\Http\Controllers\Controller;
++use App\Repositories\ActivityRepository;
++use App\Repositories\PlaceRepository;
++use Illuminate\Http\Request;
++
++class ActivityController extends Controller {
++    protected $repository;
++    protected $placeRepo;
++
++    public function __construct(ActivityRepository $repository, PlaceRepository $placeRepo) {
++        $this->repository = $repository;
++        $this->placeRepo = $placeRepo;
++    }
++
++    public function index() {
++        $items = $this->repository->all();
++        return view('admin.activities.index', compact('items'));
++    }
++
++    public function create() {
++        $places = $this->placeRepo->all();
++        return view('admin.activities.create', compact('places'));
++    }
++
++    public function store(Request $request) {
++        $this->repository->create($request->all());
++        return redirect()->route('admin.activities.index')->with('success', 'Created successfully');
++    }
++
++    public function edit($id) {
++        $item = $this->repository->find($id);
++        $places = $this->placeRepo->all();
++        return view('admin.activities.edit', compact('item', 'places'));
++    }
++
++    public function update(Request $request, $id) {
++        $this->repository->update($id, $request->all());
++        return redirect()->route('admin.activities.index')->with('success', 'Updated successfully');
++    }
++
++    public function destroy($id) {
++        $this->repository->delete($id);
++        return redirect()->route('admin.activities.index')->with('success', 'Deleted successfully');
++    }
++}
+--- /dev/null
++++ b/resources/views/admin/activities/index.blade.php
+@@ -0,0 +1,25 @@
++@extends('layouts.admin')
++@section('content')
++    <h1>Activities</h1>
++    <a href="{{ route('admin.activities.create') }}">Create New</a>
++    <table border="1" cellpadding="10" style="width:100%; border-collapse: collapse; margin-top:20px;">
++        <thead>
++            <tr>
++                <th>Name</th>
++                <th>Date</th>
++                <th>Actions</th>
++            </tr>
++        </thead>
++        <tbody>
++            @foreach($items as $item)
++            <tr>
++                <td>{{ $item->name }}</td>
++                <td>{{ $item->date }}</td>
++                <td>
++                    <a href="{{ route('admin.activities.edit', $item->id) }}">Edit</a>
++                </td>
++            </tr>
++            @endforeach
++        </tbody>
++    </table>
++@endsection
