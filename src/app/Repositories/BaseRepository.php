@@ -5,7 +5,7 @@ abstract class BaseRepository {
     protected $model;
 
     public function all() {
-        return $this->model->all();
+        return $this->model->paginate(15);
     }
 
     public function find($id) {

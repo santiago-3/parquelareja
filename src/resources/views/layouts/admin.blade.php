@@ -2,32 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Admin CRUD</title>
+    <title>Admin parque la reja</title>
+    <link href="/css/admin.css" rel="stylesheet" type="text/css" />
     <style>
-        .nav { background: #f4f4f4; padding: 1rem; margin-bottom: 2rem; }
-        .nav a { margin-right: 15px; text-decoration: none; color: #333; }
-        .alert { padding: 10px; margin-bottom: 10px; background: #d4edda; color: #155724; }
     </style>
 </head>
 <body>
-    <nav class="nav">
-        <strong>Menu:</strong>
-        <a href="{{ route('admin.activities.index') }}">Activities</a>
-        <a href="{{ route('admin.places.index') }}">Places</a> |
-        <a href="{{ route('admin.people.index') }}">People</a> |
-        <a href="{{ route('admin.states.index') }}">States</a> |
-        <a href="{{ route('admin.reservations.index') }}">Reservations</a> |
-        <a href="{{ route('admin.reservation-extras.index') }}">Reservation extras</a> |
-        <a href="{{ route('admin.guests.index') }}">Guests</a> |
-        <a href="{{ route('admin.price-items.index') }}">Price items</a> |
-        +    </nav>
+    <header>
+        <h4>Parque la reja - Administración</h4>
+        <span class="user">{{ auth()->user()->name }}</span>
+    </header>
+    <div class="page">
+        <nav class="nav">
+            <a href="{{ route('admin.activities.index') }}">Actividades</a>
+            <a href="{{ route('admin.places.index') }}">Lugares</a>
+            <a href="{{ route('admin.people.index') }}">Personas</a>
+            <a href="{{ route('admin.states.index') }}">Estados</a>
+            <a href="{{ route('admin.reservations.index') }}">Reservas</a>
+            <a href="{{ route('admin.reservation-extras.index') }}">Reservas extra</a>
+            <a href="{{ route('admin.guests.index') }}">Invitados</a>
+            <a href="{{ route('admin.price-items.index') }}">Items de precio</a>
+        </nav>
 
-    @if(session('success'))
-        <div class="alert">{{ session('success') }}</div>
-    @endif
+        @if(session('success'))
+            <div class="alert">{{ session('success') }}</div>
+        @endif
 
-    <div class="container">
-        @yield('content')
+        <div class="container">
+            @yield('content')
+        </div>
     </div>
 </body>
 </html>

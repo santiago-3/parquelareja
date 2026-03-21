@@ -1,13 +1,13 @@
 @extends('layouts.admin')
 @section('content')
-    <h1>Activities</h1>
+    <h1>Actividades</h1>
     <a href="{{ route('admin.activities.create') }}">Create New</a>
-    <table border="1" cellpadding="10" style="width:100%; border-collapse: collapse; margin-top:20px;">
+    <table cellpadding="5">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Date</th>
-                <th>Actions</th>
+                <th>Nombre</th>
+                <th>Fecha</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -22,4 +22,7 @@
             @endforeach
         </tbody>
     </table>
+    <div class="paginator">
+        {{ $items->links() }}
+    </div>
 @endsection

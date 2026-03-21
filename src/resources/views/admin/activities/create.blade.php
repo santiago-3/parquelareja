@@ -13,7 +13,7 @@
 
     <div style="margin-bottom: 15px;">
         <label for="date">Date & Time:</label><br>
-        <input type="datetime-local" id="date" name="date" required>
+        <input type="date" id="date" name="date" required>
     </div>
 
     <div style="margin-bottom: 15px;">
