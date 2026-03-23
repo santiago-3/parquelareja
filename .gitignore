@@ -2,3 +2,6 @@
 .env
 .git
 .config
+src/.bash_history
+src/.config/psysh/psysh_history
+src/.lesshst
