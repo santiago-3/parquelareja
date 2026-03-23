@@ -16,7 +16,7 @@ class ActivityController extends Controller {
     }
 
     public function index() {
-        $items = $this->repository->all();
+        $items  = $this->repository->paginate();
         return view('admin.activities.index', compact('items'));
     }
 

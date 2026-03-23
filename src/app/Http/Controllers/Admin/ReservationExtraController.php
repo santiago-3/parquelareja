@@ -30,7 +30,7 @@ class ReservationExtraController extends Controller
 
     public function index()
     {
-        $items = $this->repo->all();
+        $items = $this->repo->paginate();
         return view('admin.reservation_extras.index', compact('items'));
     }
 

@@ -31,7 +31,7 @@
 
     <div style="margin-bottom: 15px;">
         <label for="link">Link:</label><br>
-        <input type="url" id="link" name="link" value="{{ $item->link }}" required style="width: 100%; max-width: 400px;">
+        <input id="link" name="link" value="{{ $item->link }}" required style="width: 100%; max-width: 400px;">
     </div>
 
     <div style="margin-bottom: 15px;">

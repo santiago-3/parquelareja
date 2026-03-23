@@ -1,35 +1,32 @@
 @extends('layouts.admin')
 
 @section('content')
-<div style="display: flex; justify-content: space-between; align-items: center;">
-    <h1>Places</h1>
-    <a href="{{ route('admin.places.create') }}" style="padding: 10px 15px; background: #007bff; color: white; text-decoration: none; border-radius: 4px;">+ Add New Place</a>
+<div class="upper-bar flex-between">
+    <h1>Lugares</h1>
+    <a class="button-like" href="{{ route('admin.places.create') }}">+ Nuevo lugar</a>
 </div>
 
-<table border="1" cellpadding="10" style="width:100%; border-collapse: collapse; margin-top:20px; text-align: left;">
-    <thead style="background: #eee;">
+<table cellspacing="0">
+    <thead>
         <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Capacity</th>
-            <th>Actions</th>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Capacidad</th>
         </tr>
     </thead>
     <tbody>
         @forelse($items as $item)
-        <tr>
-            <td>{{ $item->id }}</td>
-            <td><strong>{{ $item->name }}</strong></td>
-            <td>{{ $item->capacity }} people</td>
-            <td>
-                <a href="{{ route('admin.places.edit', $item->id) }}">Edit</a>
-            </td>
+        <tr data-link="/admin/places/{{ $item->id }}/edit">
+            <td width="5%">{{ $item->id }}</td>
+            <td width="60%"><strong>{{ $item->name }}</strong></td>
+            <td width="35">{{ $item->capacity }} personas</td>
         </tr>
         @empty
         <tr>
-            <td colspan="4" style="text-align: center;">No places found.</td>
+            <td colspan="4" style="text-align: center;">No hay lugares cargados</td>
         </tr>
         @endforelse
     </tbody>
 </table>
+<script src="/js/lists.js"></script>
 @endsection

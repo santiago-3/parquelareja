@@ -1,33 +1,35 @@
 @extends('layouts.admin')
 
 @section('content')
-<div style="display: flex; justify-content: space-between; align-items: center;">
-    <h1>People</h1>
-    <a href="{{ route('admin.people.create') }}" style="padding: 10px 15px; background: #007bff; color: white; text-decoration: none; border-radius: 4px;">+ Add Person</a>
+<div class="upper-bar flex-between">
+    <h1>Personas</h1>
+    <a class="button-like" href="{{ route('admin.people.create') }}">+ Agregar persona</a>
 </div>
 
-<table border="1" cellpadding="10" style="width:100%; border-collapse: collapse; margin-top:20px;">
-    <thead style="background: #eee;">
+<table cellspacing="0">
+    <thead>
         <tr>
-            <th>Name</th>
+            <th>Id</th>
+            <th>Nombre</th>
             <th>Email</th>
-            <th>Phone</th>
-            <th>Master?</th>
-            <th>Actions</th>
+            <th>Teléfono</th>
+            <th>Es maestro</th>
         </tr>
     </thead>
     <tbody>
         @foreach($items as $item)
-        <tr>
+        <tr data-link="/admin/people/{{ $item->id }}/edit">
+            <td>{{ $item->id }}</td>
             <td>{{ $item->name }} {{ $item->last_name }}</td>
             <td>{{ $item->email }}</td>
             <td>{{ $item->phone }}</td>
-            <td>{{ $item->is_master ? 'Yes' : 'No' }}</td>
-            <td>
-                <a href="{{ route('admin.people.edit', $item->id) }}">Edit</a>
-            </td>
+            <td>{{ $item->is_master ? 'Si' : 'No' }}</td>
         </tr>
         @endforeach
     </tbody>
 </table>
+<div class="paginator">
+    {{ $items->links('vendor.pagination.default') }}
+</div>
+<script src="/js/lists.js"></script>
 @endsection

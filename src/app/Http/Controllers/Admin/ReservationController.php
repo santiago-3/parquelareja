@@ -26,7 +26,7 @@ class ReservationController extends Controller
 
     public function index()
     {
-        $items = $this->repo->all();
+        $items = $this->repo->last();
         return view('admin.reservations.index', compact('items'));
     }
 

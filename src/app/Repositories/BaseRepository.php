@@ -5,6 +5,10 @@ abstract class BaseRepository {
     protected $model;
 
     public function all() {
+        return $this->model->all();
+    }
+
+    public function paginate() {
         return $this->model->paginate(15);
     }
 

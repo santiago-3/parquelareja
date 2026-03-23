@@ -1,37 +1,39 @@
 @extends('layouts.admin')
 
 @section('content')
-<div style="display: flex; justify-content: space-between; align-items: center;">
-    <h1>Reservation Hosts (Guests)</h1>
-    <a href="{{ route('admin.guests.create') }}" style="padding: 10px 15px; background: #007bff; color: white; text-decoration: none; border-radius: 4px;">+ Add Host</a>
+<div class="upper-bar flex-between">
+    <h1>Visitantes</h1>
+    <a class="button-like" href="{{ route('admin.guests.create') }}">+ Nuevo visitante</a>
 </div>
 
-<table border="1" cellpadding="10" style="width:100%; border-collapse: collapse; margin-top:20px;">
-    <thead style="background: #eee;">
+<table cellspacing="0">
+    <thead>
         <tr>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Origin (State)</th>
-            <th>Reservation #</th>
-            <th>Actions</th>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Email</th>
+            <th>Teléfono</th>
         </tr>
     </thead>
     <tbody>
         @forelse($items as $item)
-        <tr>
-            <td>{{ $item->name }} {{ $item->last_name }}</td>
-            <td>{{ $item->category }}</td>
-            <td>{{ $item->state->name ?? 'N/A' }}</td>
-            <td>Res #{{ $item->reservation_id }}</td>
-            <td>
-                <a href="{{ route('admin.guests.edit', $item->id) }}">Edit</a>
-            </td>
+        <tr data-link="/admin/guests/{{ $item->id }}/edit">
+            <td>{{ $item->id }}</td>
+            <td>{{ $item->nombre }}</td>
+            <td>{{ $item->apellido }}</td>
+            <td>{{ $item->email }}</td>
+            <td>{{ $item->telefono }}</td>
         </tr>
         @empty
         <tr>
-            <td colspan="5" style="text-align: center;">No hosts registered.</td>
+            <td colspan="5" style="text-align: center;">No hay visitantes registrados</td>
         </tr>
         @endforelse
     </tbody>
 </table>
+<div class="paginator">
+    {{ $items->links('vendor.pagination.default') }}
+</div>
+<script src="/js/lists.js"></script>
 @endsection

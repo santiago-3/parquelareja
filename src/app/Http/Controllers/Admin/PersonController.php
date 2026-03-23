@@ -17,7 +17,7 @@ class PersonController extends Controller
 
     public function index()
     {
-        $items = $this->repo->all();
+        $items = $this->repo->paginate();
         return view('admin.people.index', compact('items'));
     }
 

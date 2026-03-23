@@ -1,8 +1,14 @@
+:root {
+    --background: #243753;
+    --column-background: #293e53;
+    --highlighted-line: #141434;
+    --button: #efefef;
+}
 body {
     font-family: 'Palatino Linotype', 'Bookman Old Style', 'Times', 'Arial', 'Helvetica', 'Courier new', 'Courier';
     font-size: 18px;
     margin: 0;
-    background-color: #293e53;
+    background-color: var( --background );
     color: #dfdfdf;
 }
 div, a {
@@ -14,6 +20,42 @@ a {
 }
 a:visited {
     color: #aaaaff;
+}
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+}
+table {
+    width: 100%;
+}
+table tbody tr:hover {
+    cursor: pointer;
+}
+table tbody tr:nth-child(odd) {
+    background-color: var( --column-background );
+}
+table tbody tr:hover {
+    background-color: var( --highlighted-line );
+}
+table td:first-child, table th:first-child {
+    padding-left: 20px;
+}
+table td {
+    padding: 8px 0px;
+}
+.flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+a.button-like {
+    background-color: var( --button );
+    padding: 10px;
+    border-radius: 8px;
+    color: var( --column-background );
+}
+.upper-bar {
+    padding: 20px;
 }
 header {
     background-color: #202020;
@@ -35,29 +77,48 @@ nav.nav {
     display: flex;
     flex-direction: column;
     box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.3);
+    background-color: var( --column-background );
+    z-index: 10;
 }
 nav a {
     color: #ffffff;
     width: 100%;
     padding: 10px 20px 10px 32px;
 }
-nav a:hover {
-    background-color: #243753;
-}
 nav a:visited {
     color: #ffffff;
 }
+nav a:hover {
+    text-shadow: 5px 5px 2px #222;
+    color: #dfdfdf;
+}
 .container {
-    padding-left: 20px;
-    background-color: #243753;
     flex-grow: 1;
+    position: relative;
 }
 .container h1 {
-    padding-left: 20px;
 }
 .container th {
     text-align: left;
 }
+.container .alert {
+    position: absolute;
+}
 .paginator svg {
     width: 20px;    
+}
+.pagination {
+    padding: 0px;
+    display: flex;
+    list-style-type: none;
+}
+.pagination a, .pagination span {
+    padding: 3px 10px;
+}
+.pagination .current-page {
+    font-weight: normal;
+    background-color: var( --column-background );
+    color: #efefef;
+    border-radius: 10%;
+    box-shadow: 2px 2px 1px 1px rgba(255, 255, 255, 0.2);
 }

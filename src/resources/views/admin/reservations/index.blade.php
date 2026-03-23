@@ -1,33 +1,33 @@
 @extends('layouts.admin')
 
 @section('content')
-<div style="display: flex; justify-content: space-between; align-items: center;">
-    <h1>Reservations</h1>
-    <a href="{{ route('admin.reservations.create') }}" style="padding: 10px 15px; background: #007bff; color: white; text-decoration: none; border-radius: 4px;">+ New Reservation</a>
+<div class="upper-bar flex-between">
+    <h1>Reservas</h1>
+    <a class="button-like" href="{{ route('admin.reservations.create') }}">+ Nueva reserva</a>
 </div>
 
-<table border="1" cellpadding="10" style="width:100%; border-collapse: collapse; margin-top:20px;">
-    <thead style="background: #eee;">
+<table cellspacing="0">
+    <thead>
         <tr>
-            <th>ID</th>
-            <th>Responsible</th>
-            <th>State</th>
-            <th>Paid / Total</th>
-            <th>Actions</th>
+            <th>Id</th>
+            <th>Responsable</th>
+            <th>Estado</th>
+            <th>Fecha de creación</th>
         </tr>
     </thead>
     <tbody>
         @foreach($items as $item)
-        <tr>
+        <tr data-link="/admin/reservations/{{ $item->id }}/edit">
             <td>{{ $item->id }}</td>
             <td>{{ $item->responsible->name ?? 'N/A' }} {{ $item->responsible->last_name ?? '' }}</td>
             <td>{{ $item->state->name ?? 'N/A' }}</td>
-            <td>${{ $item->paid_amount }} / ${{ $item->total_amount }}</td>
-            <td>
-                <a href="{{ route('admin.reservations.edit', $item->id) }}">Edit</a>
-            </td>
+            <td>{{ date('d-m-Y H:i', strtotime($item->created_at)) }}</td>
         </tr>
         @endforeach
     </tbody>
 </table>
+<div class="paginator">
+    {{ $items->links('vendor.pagination.default') }}
+</div>
+<script src="/js/lists.js"></script>
 @endsection

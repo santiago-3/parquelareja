@@ -16,39 +16,31 @@ class GuestController extends Controller
 
     public function __construct(
         GuestRepository $repo,
-        ReservationRepository $resRepo,
-        StateRepository $stateRepo
     ) {
         $this->repo = $repo;
-        $this->resRepo = $resRepo;
-        $this->stateRepo = $stateRepo;
     }
 
     public function index()
     {
-        $items = $this->repo->all();
+        $items = $this->repo->paginate();
         return view('admin.guests.index', compact('items'));
     }
 
     public function create()
     {
-        $reservations = $this->resRepo->all();
-        $states = $this->stateRepo->all();
-        return view('admin.guests.create', compact('reservations', 'states'));
+        return view('admin.guests.create');
     }
 
     public function store(Request $request)
     {
         $this->repo->create($request->all());
-        return redirect()->route('admin.guests.index')->with('success', 'Host added successfully');
+        return redirect()->route('admin.guests.index')->with('success', 'Guest added successfully');
     }
 
     public function edit($id)
     {
         $item = $this->repo->find($id);
-        $reservations = $this->resRepo->all();
-        $states = $this->stateRepo->all();
-        return view('admin.guests.edit', compact('item', 'reservations', 'states'));
+        return view('admin.guests.edit', compact('item'));
     }
 
     public function update(Request $request, $id)

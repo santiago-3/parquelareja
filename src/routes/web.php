@@ -25,7 +25,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/', [ActivityController::class, 'index']);
+    Route::get('/', [ReservationController::class, 'index']);
     Route::resource('activities', ActivityController::class);
     Route::resource('places', PlaceController::class);
     Route::resource('people', PersonController::class);

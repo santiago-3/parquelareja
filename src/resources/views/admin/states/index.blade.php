@@ -1,33 +1,30 @@
 @extends('layouts.admin')
 
 @section('content')
-<div style="display: flex; justify-content: space-between; align-items: center;">
-    <h1>States / Statuses</h1>
-    <a href="{{ route('admin.states.create') }}" style="padding: 10px 15px; background: #007bff; color: white; text-decoration: none; border-radius: 4px;">+ Add New State</a>
+<div class="upper-bar flex-between">
+    <h1>Estados de reserva</h1>
+    <a class="button-like"  href="{{ route('admin.states.create') }}">+ Agregar estado</a>
 </div>
 
-<table border="1" cellpadding="10" style="width:100%; border-collapse: collapse; margin-top:20px; text-align: left;">
-    <thead style="background: #eee;">
+<table cellspacing="0">
+    <thead>
         <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th style="width: 150px;">Actions</th>
+            <th>Id</th>
+            <th>Nombre</th>
         </tr>
     </thead>
     <tbody>
         @forelse($items as $item)
-        <tr>
+        <tr data-link="/admin/states/{{ $item->id }}/edit">
             <td>{{ $item->id }}</td>
             <td>{{ $item->name }}</td>
-            <td>
-                <a href="{{ route('admin.states.edit', $item->id) }}">Edit</a>
-            </td>
         </tr>
         @empty
         <tr>
-            <td colspan="3" style="text-align: center;">No states defined yet.</td>
+            <td colspan="3" style="text-align: center;">No hay estados cargados</td>
         </tr>
         @endforelse
     </tbody>
 </table>
+<script src="/js/lists.js"></script>
 @endsection
