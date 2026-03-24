@@ -1,5 +1,5 @@
 :root {
-    --background: #d1d1d9;
+    --background: #243753;
     --column-background: #293e53;
     --highlighted-line: #141434;
     --button: #efefef;
@@ -32,10 +32,10 @@ table tbody tr:hover {
     cursor: pointer;
 }
 table tbody tr:nth-child(odd) {
-    background-color: #c1c1c9;
+    background-color: var( --column-background );
 }
 table tbody tr:hover {
-    background-color: #efefef;
+    background-color: var( --highlighted-line );
 }
 table td:first-child, table th:first-child {
     padding-left: 20px;
@@ -88,14 +88,13 @@ nav a {
 nav a:visited {
     color: #ffffff;
 }
-nav.nav a:hover {
+nav a:hover {
     text-shadow: 5px 5px 2px #222;
     color: #dfdfdf;
 }
 .container {
     flex-grow: 1;
     position: relative;
-    color: #333;
 }
 .container h1 {
 }
@@ -113,9 +112,8 @@ nav.nav a:hover {
     display: flex;
     list-style-type: none;
 }
-.pagination a, .pagination a:visited, .pagination span {
+.pagination a, .pagination span {
     padding: 3px 10px;
-    color: #333;
 }
 .pagination .current-page {
     font-weight: normal;
