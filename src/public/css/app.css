@@ -4,6 +4,7 @@
 }
 body, ul, h1 {
     margin: 0;
+    font-family: 'Palatino Linotype', 'Bookman Old Style', 'Times', 'Arial', 'Helvetica', 'Courier new', 'Courier';
 }
 a {
     text-decoration: none;
@@ -18,6 +19,10 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+.page {
+    padding: 20px;
+    min-height: 80vh;
 }
 nav {
     background-color: #505050;
@@ -46,4 +51,96 @@ nav ul a {
 .main-title h1 {
     padding: 0;
     font-size: 64px;
+}
+.content {
+    padding-top: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.content .centered {
+    width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.content .row {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 35px;
+    margin-bottom: 20px;
+}
+.content .row .img-container {
+    width: 300px;
+    height: 160px;
+    overflow: hidden;
+}
+.content .row img {
+    width: 300px;
+}
+.content .row .description {
+    width: 1000px;
+}
+.content .custom-links {
+    margin-bottom: 20px;
+}
+.content .custom-links ul {
+    list-style-type: none;
+    display: flex;
+    gap: 10px;
+    padding: 0;
+    margin: 0;
+}
+.content .custom-links li {
+    background-color: #538cc6;
+    padding: 8px 10px;
+    text-align: center;
+    border-radius: 8px;
+}
+.content .custom-links li a {
+    color: #ffffff;
+    font-size: 18px;
+}
+.content .custom-links li a:hover {
+    text-decoration: underline;
+}
+
+
+/* calendar */
+.page.calendar .calendars {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+.page.calendar .month {
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #dfecf0;
+}
+.page.calendar .week {
+    display: flex;
+    gap: 3px;
+    justify-content: flex-start;
+    margin-bottom: 5px;
+}
+.page.calendar .week:first-child .day {
+    background-color: #ffdddf;
+}
+
+.page.calendar .day {
+    border-radius: 4px;
+    background-color: #efc4de;
+    width: 25px;
+    text-align: center;
+    padding: 3px;
+}
+.page.calendar .day.occupied {
+    background-color: #cfb3da;
+    cursor: pointer;
+}
+.page.calendar .day-detail {
+    display: none;
 }

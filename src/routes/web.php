@@ -7,12 +7,39 @@ use App\Http\Controllers\Admin\PriceItemController;
 use App\Http\Controllers\Admin\ReservationController;
 use App\Http\Controllers\Admin\ReservationExtraController;
 use App\Http\Controllers\Admin\StateController;
+use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\ActivityController;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('el-parque', function() {
+    return view('el-parque');
+});
+
+Route::get('producciones', function() {
+    return view('productions');
+});
+
+Route::get('reservas', function() {
+    return view('reservations');
+});
+
+Route::get('actividades', function() {
+    return view('activities');
+});
+
+Route::get('otros-parques', function() {
+    return view('other-parks');
+});
+
+Route::get('contacto', function() {
+    return view('contact');
+});
+
+Route::get('calendario-de-uso', [CalendarController::class, 'index']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
