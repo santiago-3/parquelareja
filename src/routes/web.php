@@ -9,7 +9,8 @@ use App\Http\Controllers\Admin\ReservationExtraController;
 use App\Http\Controllers\Admin\StateController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Admin\ActivityController;
+use App\Http\Controllers\Admin\ActivityController as AdminActivityController;
+use App\Http\Controllers\ActivitiesController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -27,10 +28,6 @@ Route::get('reservas', function() {
     return view('reservations');
 });
 
-Route::get('actividades', function() {
-    return view('activities');
-});
-
 Route::get('otros-parques', function() {
     return view('other-parks');
 });
@@ -40,6 +37,7 @@ Route::get('contacto', function() {
 });
 
 Route::get('calendario-de-uso', [CalendarController::class, 'index']);
+Route::get('actividades', [ActivitiesController::class, 'index']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -53,7 +51,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [ReservationController::class, 'index']);
-    Route::resource('activities', ActivityController::class);
+    Route::resource('activities', AdminActivityController::class);
     Route::resource('places', PlaceController::class);
     Route::resource('people', PersonController::class);
     Route::resource('states', StateController::class);

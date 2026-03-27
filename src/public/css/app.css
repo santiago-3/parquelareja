@@ -1,6 +1,7 @@
 :root {
     --font-color: #303030;
     --font-light-color: #dfdfdf;
+    --menu-background: #f8f8f8;
 }
 body, ul, h1 {
     margin: 0;
@@ -20,6 +21,16 @@ a {
     justify-content: space-between;
     align-items: center;
 }
+.head-and-menu {
+    background-color: var( --menu-background );
+    gap: 40px;
+}
+.head-and-menu a {
+    color: #666;
+}
+.head-and-menu a:hover {
+    background-color: var( --font-light-color );
+}
 .page {
     padding: 20px;
     min-height: 80vh;
@@ -30,36 +41,32 @@ nav {
 nav ul {
     display: flex;
     list-style-type: none;
-    padding: 0;
     flex-wrap: wrap;
 }
 nav ul li {
-    padding: 10px 0px;
+    padding: 20px 0px;
 }
 nav ul li:hover {
-    background-color: #606060;
 }
 nav ul a {
     color: var( --font-light-color );
-    padding: 10px;
+    padding: 20px 10px;
 }
 .main-title {
-    background-color: #202020;
-    color: var( --font-light-color );
+    gap: 10px;
     align-items: flex-end;
 }
-.main-title h1 {
-    padding: 0;
-    font-size: 64px;
+.main-title img {
+    height: 45px;
 }
-.content {
+.page > .container > .content {
     padding-top: 25px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
-.content .centered {
+.centered {
     width: 1200px;
     display: flex;
     flex-direction: column;
@@ -109,7 +116,7 @@ nav ul a {
 }
 
 
-/* calendar */
+/*
 .page.calendar .calendars {
     display: flex;
     flex-wrap: wrap;
@@ -143,4 +150,111 @@ nav ul a {
 }
 .page.calendar .day-detail {
     display: none;
+}
+*/
+
+/*
+ * Calendario de uso
+ */
+
+.calendar .flex-row-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.calendar .left-column {
+    padding: 8px;
+    width: 320px;
+}
+.calendar h1{
+    margin-bottom: 20px;
+}
+.calendar .calendars {
+    padding-left: 8px;
+    padding-top: 8px;
+    max-width: 652px;
+}
+.calendar .calendars .month {
+    padding: 8px;
+    /*border: 2px dashed #dba;*/
+    min-height: 290px;
+    margin-right: 16px;
+    margin-bottom: 24px;
+    border-radius: 5px;
+	box-shadow: 1px 1px 6px #ddd;
+}
+.calendar .calendars .month .name {
+    padding: 2px;
+    font-weight: bold;
+    margin-left: 24px;
+    color: #d74;
+}
+.calendar .calendars .week:first-child .day {
+    height: 24px;
+    text-align: center;
+    line-height: 24px;
+    background-color: #eee;
+    color: #225;
+    cursor: default;
+    border-radius: 3px;
+}
+.calendar .calendars .week {
+    display: flex;
+    padding-left: 2px;
+    padding-top: 2px;
+}
+.calendar .calendars .day {
+    margin-right: 2px;
+    margin-bottom: 2px;
+    background-color: #f8e8d8;
+    width: 38px;
+    height: 36px;
+    text-align: center;
+    line-height: 36px;
+    color: #522;
+    border-radius: 3px;
+}
+.calendar .calendars .day.occupied {
+    background-color: #e8d8c8;
+    /*border: 1px double #b8a898;*/
+    cursor: pointer;
+}
+/* modal en calendario de uso */
+section.calendar.page .details-modal {
+	top: 0;
+	left: 0;
+	z-index: 2000;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(0,0,0,0.5);
+    color: #fff;
+}
+section.calendar.page .details-modal .container {
+	background-color: #fff;
+	padding: 20px;
+	position: relative;
+	width: 540px;
+	max-height: 96%;
+    max-width: 90%;
+	overflow-y: auto;
+    color: #333;
+    border-radius: 8px;
+}
+section.calendar.page .details {
+    display: none;
+}
+/*
+ * End calendar
+ */
+div.close-button{
+	position: absolute;
+	width: 12px;
+	top: 10px;
+	right: 20px;
+	cursor: pointer;
 }

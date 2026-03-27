@@ -187,7 +187,7 @@
                 <div class="details-modal">
                     <div class="container">
                         <div class="close-button">
-                            <i class="fa fa-close">&nbsp;</i>
+                            <i class="fa fa-close">X</i>
                         </div>
                         <div class="content">
                         </div>
