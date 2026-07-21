@@ -15,9 +15,11 @@
         @if(session('success'))
             <div class="alert">{{ session('success') }}</div>
         @endif
-        <span class="user">{{ auth()->user()->name }}</span>
+        <div>
+            {{ auth()->user()->name }} | <button onclick="logout()" class="button-anchor">logout</button>
+        </div>
     </header>
-    <div class="page">
+    <div class="page admin-layout">
         <nav class="nav">
             <a href="{{ route('admin.reservations.index') }}">Reservas</a>
             <a href="{{ route('admin.activities.index') }}">Actividades</a>
@@ -25,11 +27,17 @@
             <a href="{{ route('admin.places.index') }}">Lugares</a>
             <a href="{{ route('admin.states.index') }}">Estados</a>
         </nav>
-
-
         <div class="container">
             @yield('content')
         </div>
+        <form action="/logout" method="post">
+            @csrf
+        </form>
     </div>
 </body>
 </html>
+<script>
+    function logout() {
+        document.querySelector('form').submit();
+    }
+</script>

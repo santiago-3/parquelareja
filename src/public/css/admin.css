@@ -124,3 +124,12 @@ nav.nav a:hover {
     border-radius: 10%;
     box-shadow: 2px 2px 1px 1px rgba(255, 255, 255, 0.2);
 }
+.button-anchor {
+    border: none;
+    background: none;
+    color: #fff;
+    cursor: pointer;
+}
+.admin-layout .edit-form {
+    padding: 20px;
+}

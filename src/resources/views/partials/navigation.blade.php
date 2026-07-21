@@ -1,9 +1,11 @@
 <nav class="head-and-menu flex-center">
     <div class="flex-between">
-        <div class="main-title flex-between">
-            <img src="/svg/logo_icon.svg" alt="Logo parque">
-            <img src="/svg/logo_texto.svg" alt="Logo parque">
-        </div>
+        <a href="/">
+            <div class="main-title flex-between">
+                <img src="/svg/logo_icon.svg" alt="Logo parque">
+                <img src="/svg/logo_texto.svg" alt="Logo parque">
+            </div>
+        </a>
         <ul>
             <li><a href="/el-parque">El parque</a></li>
             <li><a href="/producciones">Producciones</a></li>

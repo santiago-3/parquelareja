@@ -8,13 +8,11 @@ use App\Http\Controllers\Admin\ReservationController;
 use App\Http\Controllers\Admin\ReservationExtraController;
 use App\Http\Controllers\Admin\StateController;
 use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\ActivityController as AdminActivityController;
 use App\Http\Controllers\ActivitiesController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('el-parque', function() {
     return view('el-parque');
@@ -36,6 +34,7 @@ Route::get('contacto', function() {
     return view('contact');
 });
 
+Route::get('/', [HomeController::class, 'index']);
 Route::get('calendario-de-uso', [CalendarController::class, 'index']);
 Route::get('actividades', [ActivitiesController::class, 'index']);
 
