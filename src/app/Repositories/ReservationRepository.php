@@ -34,7 +34,7 @@ class ReservationRepository extends BaseRepository
             ->where('lareja_web_reservation_host.enabled',1)
             ->where('lareja_web_reservation.deleted_at',null)
             ->whereIn('lareja_web_reservation.state_id',[3,5])
-            ->groupBy('lareja_web_reservation_host.from','lareja_web_reservation_host.to','pl.id','p.id')
+            ->groupBy('lareja_web_reservation_host.from','lareja_web_reservation_host.to','pl.id','p.id','p.name','p.last_name','pl.name')
             ->orderBy('p.id')
             ->get();
     }
