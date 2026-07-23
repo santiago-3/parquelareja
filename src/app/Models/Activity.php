@@ -7,9 +7,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Activity extends Model {
     use SoftDeletes;
     protected $table = 'lareja_web_activity';
-    protected $fillable = ['date', 'name', 'description', 'place_id', 'link'];
+    protected $fillable = ['date', 'name', 'description', 'place_id', 'link', 'file_id'];
 
     public function place() {
         return $this->belongsTo(Place::class);
+    }
+
+    public function image() {
+       return $this->belongsTo(Files::class, 'file_id');
     }
 }

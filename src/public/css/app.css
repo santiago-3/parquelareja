@@ -319,6 +319,7 @@ div.close-button{
 }
 .home .container {
     display: flex;
+    justify-content: space-evenly;
 }
 .home .container > div {
     padding: 20px;
@@ -326,6 +327,24 @@ div.close-button{
 .home .container > div:first-child {
     width: 75%;
 }
+.home .content {
+    max-width: 800px;
+}
 .home-item {
     max-width: 300px;
+}
+footer {
+    background-color: #333;
+    color: #bbb;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+footer h4 {
+    font-size: 18px;
+}
+footer p {
+    text-align: center;
 }

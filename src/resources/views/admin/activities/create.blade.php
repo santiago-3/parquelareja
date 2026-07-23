@@ -5,7 +5,7 @@
 <div class="edit-form">
     <h2>Create New Activity</h2>
 
-    <form action="{{ route('admin.activities.store') }}" method="POST">
+    <form action="{{ route('admin.activities.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div style="margin-bottom: 15px;">
@@ -36,6 +36,11 @@
         <div style="margin-bottom: 15px;">
             <label for="description">Description:</label><br>
             <textarea id="description" name="description" rows="4" style="width: 100%; max-width: 400px;"></textarea>
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <label for="image">Imagen:</label><br>
+            <input type="file" id="image" name="image" rows="4" >
         </div>
 
         <button type="submit">Save Activity</button>

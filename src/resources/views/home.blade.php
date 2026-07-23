@@ -54,7 +54,7 @@
             <div class="home-item">
                 @if(isset($next_activity))
                 <a href="actividades">
-                    <div class="home-activity-image" style="background-image: url({{ $next_activity['image_path']}})" alt="Silo Net "></div>
+                    <div class="home-activity-image" style="background-image: url({{ $next_activity->image->path }})" alt="Silo Net "></div>
                 </a>
                 <div class="home-titles">
                     <h4> {{ $next_activity['name'] }}</h4>
@@ -62,16 +62,8 @@
                 </div>
                 @endif
             </div>
-
-            <div class="home-item">
-                <a href="https://silo.net" target="_blank">
-                    <img src="{{'imagenes-plr/silonet.png' }}" alt="Silo Net">
-                    <div class="home-titles">
-                        <h4>Videos, conferencias, imágenes y documentos en www.silo.net</h4>
-                    </div>
-                </a>
-            </div>
         </div>
+
         </div>
     </div>
 </section>

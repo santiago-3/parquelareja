@@ -11,9 +11,6 @@ class HomeController extends Controller
         $next_activities = Activity::where('date', '>', date('Y-m-d H:i:s'))->orderBy('date', 'asc')->limit(1)->get();
         $next_activity = null;
         if (!$next_activities->isEmpty()){
-            if (!is_null($next_activities[0]->picture)){
-                $next_activities[0]['image_path'] = $next_activities[0]->picture->getPath();
-            }
             $next_activity = $next_activities[0];
         }
         $videos = [
@@ -34,6 +31,5 @@ class HomeController extends Controller
         //  $this->addJs('assets/js/home.js');
 
         return view('home', compact('video', 'next_activity'));
-
     }
 }	
