@@ -15,5 +15,8 @@
             <li><a href="/otros-parques">Otros parques</a></li>
             <li><a href="/contacto">Contacto</a></li>
         </ul>
+        <div class="hamburguer">
+            <img src="/imagenes-plr/hamburguer.png">
+        </div>
     </div>
 </nav>
