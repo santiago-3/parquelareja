@@ -30,6 +30,14 @@ Route::get('otros-parques', function() {
     return view('other-parks');
 });
 
+Route::get('uso-de-instalaciones', function() {
+    return view('uso-de-instalaciones');
+});
+
+Route::get('como-llegar', function() {
+    return view('como-llegar');
+});
+
 Route::get('contacto', function() {
     return view('contact');
 });
