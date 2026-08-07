@@ -47,6 +47,7 @@ ul li {
 }
 .head-and-menu ul {
     padding: 0px;
+    background-color: #f8f8f8;
 }
 .head-and-menu .hamburguer {
     display: none;
