@@ -27,7 +27,6 @@ class ActivityRepository extends BaseRepository {
             }
             catch(UniqueConstraintViolationException $e) {
             }
-
         }
 
         if ($file) {
@@ -35,6 +34,7 @@ class ActivityRepository extends BaseRepository {
         }
         $record = $this->find($id);
         $record->update($data);
+        $record->save();
         return $record;
     }
 
