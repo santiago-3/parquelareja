@@ -431,29 +431,38 @@ footer h4 {
 footer p {
     text-align: center;
 }
-.activities main img {
-    max-height: 500px;
+.upcoming-activities {
+    margin-top: 20px;
 }
-.activities .past-activities {
+.upcoming-activities .activity {
+    max-width: 800px;
+    padding: 25px;
+    border: 1px solid #dfdfdf;
+    border-radius: 8px;
+    box-shadow: 2px 2px 12px 2px #dfdfdf;
+}
+.upcoming-activities .activity > div {
     display: flex;
+}
+.upcoming-activities .activity .content {
     gap: 20px;
-    padding: 20px 35px;
-    background-color: #9f9f9f;
 }
-.activities .past-activities .activity {
-    background-color: #efefef;
+.upcoming-activities .activity .header {
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
 }
-.activities .past-activities .activity img {
-    max-height: 160px;
-}
-.activities .past-activities .activity .title {
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+.upcoming-activities .activity .title {
+    font-size: 20px;
     font-weight: bold;
-    max-width: 120px;
+}
+.upcoming-activities .activity .description {
+    font-size: 18px;
+    width: 60%;
+}
+.upcoming-activities .activity img {
+    width: 40%;
 }
 .list-group {
     border: 1px solid #ddd;
@@ -498,6 +507,18 @@ footer p {
         width: 100%;
     }
     .two-columns .column {
+        width: 100%;
+    }
+}
+@media (max-width: 740px) {
+    .upcoming-activities .activity .content {
+        flex-direction: column;
+        padding: 0px;
+    }
+    .upcoming-activities .activity .content img {
+        width: 100%;
+    }
+    .upcoming-activities .activity .content .description {
         width: 100%;
     }
 }

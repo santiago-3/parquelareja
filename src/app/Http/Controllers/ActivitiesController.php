@@ -12,8 +12,10 @@ class ActivitiesController extends Controller
      */
     public function index()
     {
-        $next_activities = Activity::where('date', '>', date('Y-m-d H:i:s'))->orderBy('date', 'asc')->get();
-        $old_activities	 = Activity::where('date', '<', date('Y-m-d H:i:s'))->orderBy('date', 'desc')->limit(8)->get();
+        $next_activities = Activity::where('date', '>', date('Y-m-d H:i:s'))
+            ->orderBy('date', 'asc')->get();
+        $old_activities	 = Activity::where('date', '<', date('Y-m-d H:i:s'))
+            ->orderBy('date', 'desc')->limit(8)->get();
 
         return view('activities', compact('next_activities', 'old_activities'));
     }

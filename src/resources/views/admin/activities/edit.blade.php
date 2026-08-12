@@ -32,11 +32,6 @@
             </div>
 
             <div style="margin-bottom: 15px;">
-                <label for="link">Link:</label><br>
-                <input id="link" name="link" value="{{ $item->link }}" required style="width: 100%; max-width: 400px;">
-            </div>
-
-            <div style="margin-bottom: 15px;">
                 <label for="description">Description:</label><br>
                 <textarea id="description" name="description" rows="4" style="width: 100%; max-width: 400px;">{{ $item->description }}</textarea>
             </div>

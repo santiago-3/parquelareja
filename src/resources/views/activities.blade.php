@@ -6,22 +6,27 @@
         <div class="content">
             <h1>Próximas Actividades</h1>
             <main>
+                <div class="upcoming-activities column">
                 @foreach($next_activities as $activity)
-                    @if (isset($next_activities->image))
-                        <div>{{ $activity->name }}</div>
-                        <img src="{{ $activity->image->path }}" alt="{{ $activity->name }}">
-                        <div>{{ $activity->description }}</div>
-                        <div>{{ $activity->date }}</div>
-                        @if (isset($activity->link) && $activity->link != "")
-                            <i class="link"><a target="_blank" href="{{ $activity->link }}"> Link</a></i>
-                        @endif
+                    @if (isset($activity->image))
+                        <div class="activity">
+                            <div class="header">
+                                <div class="date">{{ $activity->date }}</div>
+                                <div class="title">{{ $activity->name }}</div>
+                            </div>
+                            <div class="content">
+                                <!--<div class="image" style="background-image: url('{{ $activity->image->path }}');"></div>-->
+                                <img src="{{ $activity->image->path }}" alt="{{ $activity->name }}">
+                                <div class="description">{{ $activity->description }}</div>
+                            </div>
+                        </div>
                     @endif
-                    </div>
                 @endforeach
+                </div>
             </main>
             <div class="past-activities">
                 @foreach($old_activities as $activity)
-                    @if (isset($next_activities->image))
+                    @if (isset($activity->image) && false)
                         <div class="activity">
                             <img src="{{ $activity->image->path }}" alt="{{ $activity->name }}">
                             <div class="title">{{ $activity->name }}</div>
