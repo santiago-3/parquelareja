@@ -431,38 +431,65 @@ footer h4 {
 footer p {
     text-align: center;
 }
-.upcoming-activities {
-    margin-top: 20px;
+.activities {
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
-.upcoming-activities .activity {
+.activities .activity {
     max-width: 800px;
     padding: 25px;
     border: 1px solid #dfdfdf;
     border-radius: 8px;
     box-shadow: 2px 2px 12px 2px #dfdfdf;
 }
-.upcoming-activities .activity > div {
+.past.activities .activity {
+    max-height: 270px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+}
+.activities .activity .vail {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 75%, #fff);
+}
+.activities .activity > div {
     display: flex;
 }
-.upcoming-activities .activity .content {
-    gap: 20px;
-}
-.upcoming-activities .activity .header {
+.activities .activity .header {
     justify-content: space-between;
     flex-direction: column;
     gap: 10px;
     margin-bottom: 10px;
 }
-.upcoming-activities .activity .title {
+.activities .activity .title {
     font-size: 20px;
     font-weight: bold;
 }
-.upcoming-activities .activity .description {
+.activities .activity .content {
+    gap: 20px;
+}
+.activities .activity .description {
     font-size: 18px;
     width: 60%;
 }
-.upcoming-activities .activity img {
+.past.activities .activity .description {
+    width: 80%;
+}
+.activities .activity .img {
     width: 40%;
+}
+.past.activities .activity .img {
+    width: 20%;
+}
+.activities .activity img {
+    width: 100%;
+    border-radius: 4px;
 }
 .list-group {
     border: 1px solid #ddd;
@@ -511,14 +538,14 @@ footer p {
     }
 }
 @media (max-width: 740px) {
-    .upcoming-activities .activity .content {
+    .activities .activity .content {
         flex-direction: column;
         padding: 0px;
     }
-    .upcoming-activities .activity .content img {
+    .activities .activity .content .img {
         width: 100%;
     }
-    .upcoming-activities .activity .content .description {
+    .activities .activity .content .description {
         width: 100%;
     }
 }

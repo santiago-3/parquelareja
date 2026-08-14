@@ -28,9 +28,11 @@
     </main>
 
     <!-- Footer Section -->
+    @if (isset($nofooter))
     <footer>
         @include('partials.footer')
     </footer>
+    @endif
 
     <!-- Scripts -->
     
