@@ -27,6 +27,7 @@
             </main>
         </div>
     </div>
+    <script src="/js/past-activities.js"></script>
 </section>
 @endsection
 

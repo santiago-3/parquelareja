@@ -450,6 +450,9 @@ footer p {
     position: relative;
     cursor: pointer;
 }
+.past.activities .activity.selected {
+    max-height: inherit;
+}
 .activities .activity .vail {
     position: absolute;
     top: 0px;
@@ -457,6 +460,9 @@ footer p {
     width: 100%;
     height: 100%;
     background: linear-gradient(to bottom, transparent 75%, #fff);
+}
+.past.activities .activity.selected .vail {
+    background: none;
 }
 .activities .activity > div {
     display: flex;
