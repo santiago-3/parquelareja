@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('scroll', () => {
         const clientHeight = document.documentElement.clientHeight
         const scrollTop = document.documentElement.scrollTop
-        if (scrollTop + clientHeight > state.scrollHeight - 10) {
+        if (scrollTop + clientHeight > state.scrollHeight - 65) {
             if (state.safeToLoadFurther) {
                 loadFurther()
             }
@@ -35,26 +35,33 @@ function initActivities() {
     let activitiesMarked = 0
     document.querySelectorAll('#activities.past .activity').forEach( activity => {
         activitiesVisited++
-        frameHeight = activity.querySelector('.frame').offsetHeight
-        if (frameHeight > 270) {
-            activitiesMarked++
-            activity.classList.add('high')
-        }
+        markActivityAsHighIfNeeded(activity)
     })
     let highActivitiesVisited = 0
     document.querySelectorAll('#activities.past .activity:not(.initialized).high').forEach( activity => {
         highActivitiesVisited++
-        activity.classList.add('initialized')
-        activity.addEventListener('click', ev =>  {
-            let activity = ev.target.closest('.activity')
-            if (activity.classList.contains('selected')) {
-                activity.classList.remove('selected')
-            }
-            else {
-                hideAll()
-                activity.classList.add('selected')
-            }
-        })
+        bindClickEventToActivity(activity)
+    })
+}
+
+function markActivityAsHighIfNeeded(activityElem) {
+    frameHeight = activityElem.querySelector('.frame').offsetHeight
+    if (frameHeight > 270) {
+        activityElem.classList.add('high')
+    }
+}
+
+function bindClickEventToActivity(activityElem) {
+    activityElem.addEventListener('click', ev =>  {
+        let actualActivity = ev.target.closest('.activity') // actualActivity because though the click event is binded to the activity element, the target of the event will be vail cause it's in front
+        if (actualActivity.classList.contains('selected')) {
+            actualActivity.classList.remove('selected')
+        }
+        else {
+            hideAll()
+            actualActivity.classList.add('selected')
+        }
+        actualActivity.classList.add('initialized')
     })
 }
 
@@ -140,10 +147,15 @@ function render() {
                     }),
                 ],
             })
-            images.push(activityElem.querySelector('img'))
+
+            let image = activityElem.querySelector('img')
+            new Promise(resolve => { image.onload = image.onerror = resolve; }).then(() => {
+                markActivityAsHighIfNeeded(activityElem)
+                if (activityElem.classList.contains('high')) {
+                    bindClickEventToActivity(activityElem)
+                }
+            });
+
             activitiesElem.appendChild(activityElem)
         })
-    Promise.all(images.map(img => new Promise(resolve => { img.onload = img.onerror = resolve; }))).then(() => {
-        initActivities()
-    });
 }

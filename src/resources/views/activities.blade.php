@@ -26,7 +26,11 @@
                 @endforeach
                 </div>
             </main>
-            <a href="/actividades-pasadas">Ver actividades pasadas</div>
+            <div class="custom-links">
+                <ul>
+                    <li><a href="/actividades-pasadas">Ver actividades pasadas</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 </section>
