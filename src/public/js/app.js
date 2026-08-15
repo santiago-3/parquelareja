@@ -1,4 +1,3 @@
-console.log('something')
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.head-and-menu .hamburguer').addEventListener('click', () => {
         let menu = document.querySelector('.head-and-menu ul')

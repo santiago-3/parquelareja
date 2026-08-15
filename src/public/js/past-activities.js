@@ -15,8 +15,6 @@ let activities = []
 loader.style.display = 'none';
 
 document.addEventListener('DOMContentLoaded', () => {
-    initActivities()
-    console.log('scroll height', state.scrollHeight)
     document.addEventListener('scroll', () => {
         const clientHeight = document.documentElement.clientHeight
         const scrollTop = document.documentElement.scrollTop
@@ -28,17 +26,27 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 })
 
+addEventListener('load', () => {
+    initActivities()
+})
+
 function initActivities() {
+    let activitiesVisited = 0
+    let activitiesMarked = 0
     document.querySelectorAll('#activities.past .activity').forEach( activity => {
+        activitiesVisited++
         frameHeight = activity.querySelector('.frame').offsetHeight
         if (frameHeight > 270) {
+            activitiesMarked++
             activity.classList.add('high')
         }
     })
+    let highActivitiesVisited = 0
     document.querySelectorAll('#activities.past .activity:not(.initialized).high').forEach( activity => {
+        highActivitiesVisited++
+        activity.classList.add('initialized')
         activity.addEventListener('click', ev =>  {
             let activity = ev.target.closest('.activity')
-            activity.classList.add('initialized')
             if (activity.classList.contains('selected')) {
                 activity.classList.remove('selected')
             }
@@ -79,10 +87,10 @@ async function loadFurther() {
     state.currentLoadOffset = state.currentLoadOffset + props.batchSize
 
     loader.style.display = 'none'
-    initActivities()
 }
 
 function render() {
+    const images = []
     activities
         .filter(activity => activity.hasOwnProperty('image') && activity.image != null)
         .forEach( activity => {
@@ -132,6 +140,10 @@ function render() {
                     }),
                 ],
             })
+            images.push(activityElem.querySelector('img'))
             activitiesElem.appendChild(activityElem)
         })
+    Promise.all(images.map(img => new Promise(resolve => { img.onload = img.onerror = resolve; }))).then(() => {
+        initActivities()
+    });
 }
