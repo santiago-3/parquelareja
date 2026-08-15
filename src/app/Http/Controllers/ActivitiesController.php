@@ -17,11 +17,25 @@ class ActivitiesController extends Controller
 
         return view('activities', compact('activities'));
     }
+
     public function past()
     {
         $activities	 = Activity::where('date', '<', date('Y-m-d H:i:s'))
-            ->orderBy('date', 'desc')->limit(20)->get();
+            ->orderBy('date', 'desc')
+            ->limit(20)
+            ->get();
 
         return view('past-activities', compact('activities'));
+    }
+
+    public function load(Request $request, $offset) {
+        $activities	= Activity::where('date', '<', date('Y-m-d H:i:s'))
+            ->orderBy('date', 'desc')
+            ->offset($offset)
+            ->limit(20)
+            ->with('image')
+            ->get();
+
+        return response()->json($activities);
     }
 }

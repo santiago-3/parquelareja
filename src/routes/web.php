@@ -47,6 +47,9 @@ Route::get('calendario-de-uso', [CalendarController::class, 'index']);
 Route::get('actividades', [ActivitiesController::class, 'index']);
 Route::get('actividades-pasadas', [ActivitiesController::class, 'past']);
 
+//data
+Route::get('load-activities/{offset}', [ActivitiesController::class, 'load']);
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
