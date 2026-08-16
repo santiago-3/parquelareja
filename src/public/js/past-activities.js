@@ -58,16 +58,20 @@ function bindClickEventToActivity(activityElem) {
             actualActivity.classList.remove('selected')
         }
         else {
-            hideAll()
+            hideAll(parseInt(actualActivity.getAttribute('key')))
             actualActivity.classList.add('selected')
         }
         actualActivity.classList.add('initialized')
     })
 }
 
-function hideAll() {
+function hideAll(clickedActivityKey) {
     document.querySelectorAll('#activities.past .activity').forEach( activity => {
-        activity.classList.remove('selected')
+        const key = parseInt(activity.getAttribute('key'))
+        console.log(key, clickedActivityKey)
+        if (key <= clickedActivityKey-3 || key > clickedActivityKey) {
+            activity.classList.remove('selected')
+        }
     })
 }
 
@@ -100,9 +104,10 @@ function render() {
     const images = []
     activities
         .filter(activity => activity.hasOwnProperty('image') && activity.image != null)
-        .forEach( activity => {
+        .forEach( (activity, index) => {
             const activityElem = newElem('div', {
                 classes: ['activity'],
+                attributes: [['key', index]],
                 nodes: [
                     newElem('div', {
                         classes: ['frame'],

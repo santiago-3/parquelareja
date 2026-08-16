@@ -7,9 +7,9 @@
             <h1>Actividades pasadas</h1>
             <main>
                 <div id="activities" class="past">
-                    @foreach($activities as $activity)
+                    @foreach($activities as $index => $activity)
                         @if (isset($activity->image))
-                            <div class="activity">
+                            <div class="activity" key="{{ $index }}">
                                 <div class="frame">
                                     <div class="header">
                                         <div class="date">{{ $activity->date }}</div>
