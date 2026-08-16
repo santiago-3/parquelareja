@@ -15,10 +15,11 @@ let activities = []
 loader.style.display = 'none';
 
 document.addEventListener('DOMContentLoaded', () => {
+    loadFurther()
     document.addEventListener('scroll', () => {
         const clientHeight = document.documentElement.clientHeight
         const scrollTop = document.documentElement.scrollTop
-        if (scrollTop + clientHeight > state.scrollHeight - 65) {
+        if (scrollTop + clientHeight > state.scrollHeight - 85) {
             if (state.safeToLoadFurther) {
                 loadFurther()
             }
@@ -68,7 +69,6 @@ function bindClickEventToActivity(activityElem) {
 function hideAll(clickedActivityKey) {
     document.querySelectorAll('#activities.past .activity').forEach( activity => {
         const key = parseInt(activity.getAttribute('key'))
-        console.log(key, clickedActivityKey)
         if (key <= clickedActivityKey-3 || key > clickedActivityKey) {
             activity.classList.remove('selected')
         }
@@ -78,7 +78,7 @@ function hideAll(clickedActivityKey) {
 async function loadFurther() {
     state.safeToLoadFurther = false
     loader.style.display = 'block';
-    const url = `/load-activities/${state.currentLoadOffset+props.batchSize}`
+    const url = `/load-activities/${state.currentLoadOffset}`
     try {
         const response = await fetch(url)
         if (!response.ok) {
@@ -105,9 +105,10 @@ function render() {
     activities
         .filter(activity => activity.hasOwnProperty('image') && activity.image != null)
         .forEach( (activity, index) => {
+            const key = index + state.currentLoadOffset
             const activityElem = newElem('div', {
                 classes: ['activity'],
-                attributes: [['key', index]],
+                attributes: [['key', key]],
                 nodes: [
                     newElem('div', {
                         classes: ['frame'],
@@ -117,7 +118,7 @@ function render() {
                                 nodes: [
                                     newElem('div', {
                                         classes: ['date'],
-                                        content: activity.date,
+                                        content: activity.formattedDate,
                                     }),
                                     newElem('div', {
                                         classes: ['title'],

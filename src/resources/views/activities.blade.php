@@ -12,7 +12,7 @@
                         <div class="activity">
                             <div class="frame">
                                 <div class="header">
-                                    <div class="date">{{ $activity->date }}</div>
+                                    <div class="date">{{ $activity->formattedDate }}</div>
                                     <div class="title">{{ $activity->name }}</div>
                                 </div>
                                 <div class="content">
