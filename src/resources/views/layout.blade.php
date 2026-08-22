@@ -13,6 +13,9 @@
     <!-- Custom CSS -->
     @stack('styles')
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
+    <!-- Icons -->
+    <script src="https://kit.fontawesome.com/3e522204f1.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <!-- Header Section -->

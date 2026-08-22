@@ -8,10 +8,12 @@ use App\Http\Controllers\Admin\ReservationController;
 use App\Http\Controllers\Admin\ReservationExtraController;
 use App\Http\Controllers\Admin\StateController;
 use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\ActivityController as AdminActivityController;
 use App\Http\Controllers\ActivitiesController;
+use App\Http\Controllers\ReservationsController;
 
 
 Route::get('el-parque', function() {
@@ -20,10 +22,6 @@ Route::get('el-parque', function() {
 
 Route::get('producciones', function() {
     return view('productions');
-});
-
-Route::get('reservas', function() {
-    return view('reservations');
 });
 
 Route::get('otros-parques', function() {
@@ -38,14 +36,13 @@ Route::get('como-llegar', function() {
     return view('como-llegar');
 });
 
-Route::get('contacto', function() {
-    return view('contact');
-});
-
 Route::get('/', [HomeController::class, 'index']);
 Route::get('calendario-de-uso', [CalendarController::class, 'index']);
 Route::get('actividades', [ActivitiesController::class, 'index']);
+Route::get('contacto', [ContactController::class, 'index']);
+Route::post('contacto', [ContactController::class, 'index']);
 Route::get('actividades-pasadas', [ActivitiesController::class, 'past']);
+Route::get('reservas', [ReservationsController::class, 'index']);
 
 //data
 Route::get('load-activities/{offset}', [ActivitiesController::class, 'load']);

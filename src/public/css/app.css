@@ -31,6 +31,20 @@ ul li {
     margin: 0px;
     list-style-type: none;
 }
+input, textarea {
+    outline: none;
+}
+input {
+    min-height: 28px;
+}
+input, textarea, select {
+    border: 1px solid #dfdfdf;
+    padding: 8px;
+    font-size: 16px;
+}
+.start-hidden {
+    display: none;
+}
 .with-padding {
     padding: 20px;
 }
@@ -163,6 +177,7 @@ nav ul a {
 .centered.tight {
     max-width: 1200px;
 }
+
 .content .row {
     display: flex;
     flex-direction: row;
@@ -170,6 +185,9 @@ nav ul a {
     gap: 35px;
     margin-bottom: 5px;
     width: 100%;
+}
+.content .row.align-up{
+    align-items: flex-start;
 }
 .content .row .img-container {
     width: 20%;
@@ -411,6 +429,7 @@ div.close-button{
 .home .container {
     display: flex;
     justify-content: space-evenly;
+    border: 1px solid blue;
 }
 .home .container > div {
     padding: 20px;
@@ -538,6 +557,22 @@ footer p {
     border: 1px solid #bce8f1;
     border-radius: 4px;
 }
+.panel.contact-form {
+    width: 70%;
+    border: 1px solid #538cc6;
+}
+.panel.contact-form form {
+    padding-right: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.panel.contact-form form input, .panel.contact-form form textarea {
+    width: 100%;
+}
+.panel.panel-info {
+    height: 100%;
+}
 .panel-heading {
     padding: 15px;
     font-weight: bold;
@@ -545,31 +580,12 @@ footer p {
     color: #31708f;
     border-bottom: 1px solid #bce8f1;
 }
+.panel.contact-form .panel-heading {
+    background-color: #538cc6;
+    color: #fff;
+}
 .panel-body {
-    padding: 15px;
-}
-@media (max-width: 1160px) {
-    .content .row {
-        flex-direction: column;
-    }
-    .content .row .img-container {
-        width: 100%;
-    }
-    .two-columns .column {
-        width: 100%;
-    }
-}
-@media (max-width: 740px) {
-    #activities .activity .content {
-        flex-direction: column;
-        padding: 0px;
-    }
-    #activities .activity .content .img {
-        width: 100%;
-    }
-    #activities .activity .content .description {
-        width: 100%;
-    }
+    padding: 20px;
 }
 #panel-como-llegar {
     text-align: left;
@@ -585,4 +601,96 @@ footer p {
     text-align: center;
     bottom: 0px;
     left: 0px;
+}
+.alert {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 8px;
+    border-width: 1px;
+    border-style: solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 200;
+}
+.alert-danger {
+    background-color: #faa;
+    color: #400;
+    border-color: #400;
+}
+.page.reservas form > div {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    width: 500px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.page.reservas form input[type=radio] {
+    cursor: pointer;
+}
+.page.reservas form input:not([type=radio]), .page.reservas form select {
+    box-sizing: border-box;
+    width: 100%;
+}
+.page.reservas .multiuso .fields {
+    width: 100%;
+    display: flex;
+}
+.page.reservas .multiuso .fields input,
+.page.reservas .multiuso .fields select {
+    width: 100px;
+    width: inherit;
+}
+.page.reservas textarea {
+    min-height: 100px;
+}
+.page.reservas  .radio-field {
+    line-height: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.page.reservas .multiuso {
+    display: none;
+}
+@media (max-width: 1160px) {
+    .content .row {
+        flex-direction: column;
+    }
+    .content .row.align-up {
+        align-items: center;
+    }
+    .content .row .img-container {
+        width: 100%;
+    }
+    .two-columns .column {
+        width: 100%;
+    }
+    .panel {
+        min-width: 100%;
+    }
+}
+@media (max-width: 740px) {
+    #activities .activity .content {
+        flex-direction: column;
+        padding: 0px;
+    }
+    #activities .activity .content .img {
+        width: 100%;
+    }
+    #activities .activity .content .description {
+        width: 100%;
+    }
+    .page.reservas .content form {
+        width: 100%;
+    }
+    .page.reservas form > div {
+        width: 100%;
+    }
 }
