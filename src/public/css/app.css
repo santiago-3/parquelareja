@@ -37,7 +37,7 @@ input, textarea {
 input {
     min-height: 28px;
 }
-input, textarea, select {
+input:not([type=radio]), textarea, select {
     border: 1px solid #dfdfdf;
     padding: 8px;
     font-size: 16px;
@@ -429,7 +429,6 @@ div.close-button{
 .home .container {
     display: flex;
     justify-content: space-evenly;
-    border: 1px solid blue;
 }
 .home .container > div {
     padding: 20px;
@@ -641,6 +640,9 @@ footer p {
     width: 100%;
     display: flex;
 }
+.page.reservas .multiuso .fields div {
+    text-align: left;
+}
 .page.reservas .multiuso .fields input,
 .page.reservas .multiuso .fields select {
     width: 100px;
@@ -658,6 +660,11 @@ footer p {
 
 .page.reservas .multiuso {
     display: none;
+}
+.page.reservas .lugares .radio-field {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
 @media (max-width: 1160px) {
     .content .row {

@@ -43,6 +43,9 @@ Route::get('contacto', [ContactController::class, 'index']);
 Route::post('contacto', [ContactController::class, 'index']);
 Route::get('actividades-pasadas', [ActivitiesController::class, 'past']);
 Route::get('reservas', [ReservationsController::class, 'index']);
+Route::post('reservas', [ReservationsController::class, 'index']);
+Route::get('reservas-paso-2', [ReservationsController::class, 'step2']);
+Route::post('reservas-paso-2', [ReservationsController::class, 'step2']);
 
 //data
 Route::get('load-activities/{offset}', [ActivitiesController::class, 'load']);
